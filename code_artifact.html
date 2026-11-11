@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منظومة إدارة ثانوية عامة | علمي رياضة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #0b1120;
+            --bg-card: #1e293b;
+            --bg-card-alt: #151f32;
+            --bg-card-hover: #334155;
+            --accent: #38bdf8;
+            --accent-hover: #0284c7;
+            --accent-green: #22c55e;
+            --accent-amber: #f59e0b;
+            --accent-rose: #f43f5e;
+            --accent-purple: #a855f7;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .brand-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-badge {
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--accent);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 0.85rem;
+        }
+
+        h1 {
+            font-size: 1.65rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 2px;
+        }
+
+        .header-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        /* Buttons */
+        .btn {
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: var(--bg-card-hover);
+            border-color: var(--accent);
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: #0b1120;
+            border-color: var(--accent);
+            font-weight: 700;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+            border-color: var(--accent-hover);
+            color: #fff;
+        }
+
+        .btn-danger {
+            background-color: rgba(244, 63, 94, 0.12);
+            color: var(--accent-rose);
+            border-color: rgba(244, 63, 94, 0.35);
+        }
+
+        .btn-danger:hover {
+            background-color: var(--accent-rose);
+            color: #fff;
+        }
+
+        .btn-amber {
+            background-color: rgba(245, 158, 11, 0.15);
+            color: var(--accent-amber);
+            border-color: rgba(245, 158, 11, 0.4);
+        }
+
+        .btn-amber:hover {
+            background-color: var(--accent-amber);
+            color: #0b1120;
+        }
+
+        .btn-sm {
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            border-radius: 6px;
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 12px;
+        }
+
+        .tab-btn {
+            background: var(--bg-card-alt);
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            padding: 9px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.92rem;
+            transition: 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tab-btn.active {
+            background: var(--accent);
+            color: #0b1120;
+            border-color: var(--accent);
+        }
+
+        .tab-badge {
+            background: rgba(15, 23, 42, 0.3);
+            padding: 1px 7px;
+            border-radius: 99px;
+            font-size: 0.78rem;
+        }
+
+        /* Approved Platforms Bar */
+        .platforms-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+        }
+
+        .platform-card {
+            background: linear-gradient(135deg, #1e293b 0%, #151f32 100%);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .platform-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .platform-info h3 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .platform-tag {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 6px;
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .platform-info p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 14px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .stat-val {
+            font-size: 1.9rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin: 6px 0;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.86rem;
+            font-weight: 600;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 6px;
+            background: var(--bg-base);
+            border-radius: 99px;
+            overflow: hidden;
+            margin-top: 6px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            border-radius: 99px;
+            transition: width 0.3s ease;
+        }
+
+        /* Weekly Routine Banner */
+        .routine-strip {
+            background: var(--bg-card-alt);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 14px 18px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .routine-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .routine-pill {
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            border-radius: 6px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+        }
+
+        .routine-pill.free-day {
+            border-color: rgba(34, 197, 94, 0.45);
+            color: var(--accent-green);
+            background: rgba(34, 197, 94, 0.08);
+        }
+
+        /* Main Layout */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1.85fr 1fr;
+            gap: 20px;
+            align-items: start;
+        }
+
+        @media (max-width: 960px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 12px;
+        }
+
+        .panel-header h2 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Filters */
+        .filters-row {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        @media (max-width: 680px) {
+            .filters-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        input, select {
+            background: var(--bg-base);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 9px 12px;
+            outline: none;
+            width: 100%;
+            font-size: 0.9rem;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--accent);
+        }
+
+        /* Lesson Cards */
+        .lesson-card {
+            background: var(--bg-base);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: border-color 0.2s ease;
+        }
+
+        .lesson-card.overdue-card {
+            border-right: 4px solid var(--accent-rose);
+        }
+
+        .lesson-card.completed-card {
+            border-right: 4px solid var(--accent-green);
+        }
+
+        .lesson-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .subject-badge {
+            background: #0284c7;
+            color: #fff;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .status-badge {
+            font-size: 0.75rem;
+            padding: 3px 9px;
+            border-radius: 6px;
+            font-weight: 700;
+        }
+
+        .status-overdue {
+            background: rgba(244, 63, 94, 0.15);
+            color: var(--accent-rose);
+            border: 1px solid rgba(244, 63, 94, 0.35);
+        }
+
+        .status-done {
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--accent-green);
+            border: 1px solid rgba(34, 197, 94, 0.35);
+        }
+
+        .status-upcoming {
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--accent);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+
+        .lesson-details {
+            font-size: 0.84rem;
+            color: var(--text-muted);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            align-items: center;
+        }
+
+        .attendance-box {
+            background: var(--bg-card-alt);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .task-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 8px;
+        }
+
+        .task-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 8px 10px;
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-size: 0.86rem;
+            cursor: pointer;
+            transition: 0.15s ease;
+        }
+
+        .task-item:hover {
+            border-color: var(--accent);
+        }
+
+        .task-item input[type="checkbox"] {
+            width: 17px;
+            height: 17px;
+            accent-color: var(--accent);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .task-done {
+            text-decoration: line-through;
+            color: var(--text-muted);
+            background: rgba(34, 197, 94, 0.05);
+            border-color: rgba(34, 197, 94, 0.25);
+        }
+
+        /* Backlog Items */
+        .backlog-item {
+            border-right: 4px solid var(--accent-rose);
+            background: rgba(244, 63, 94, 0.06);
+            border-top: 1px solid rgba(244, 63, 94, 0.2);
+            border-left: 1px solid rgba(244, 63, 94, 0.2);
+            border-bottom: 1px solid rgba(244, 63, 94, 0.2);
+            padding: 14px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .backlog-reasons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .reason-chip {
+            font-size: 0.75rem;
+            background: rgba(244, 63, 94, 0.18);
+            color: #fda4af;
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+
+        .reschedule-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            align-items: center;
+            padding-top: 6px;
+            border-top: 1px dashed rgba(244, 63, 94, 0.25);
+        }
+
+        /* Subject Matrix */
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 16px;
+        }
+
+        .subject-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* Code Block for Git Guide */
+        .code-box {
+            background: #070b14;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 14px;
+            font-family: 'Inter', monospace;
+            font-size: 0.85rem;
+            color: #38bdf8;
+            direction: ltr;
+            text-align: left;
+            overflow-x: auto;
+            position: relative;
+            margin: 8px 0 16px 0;
+        }
+
+        /* Modal & Toast */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 640px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .toast-container {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .toast {
+            background: #1e293b;
+            color: #f8fafc;
+            border-right: 4px solid var(--accent);
+            border-top: 1px solid var(--border);
+            border-left: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 18px;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- الرأس -->
+    <header>
+        <div>
+            <div class="brand-title">
+                <span class="brand-badge">علمي رياضة 2026/2027</span>
+                <h1>منظومة إدارة ومذاكرة تالتة ثانوي</h1>
+            </div>
+            <p class="subtitle">تتبع الحصص، المهام الخمس لكل درس، ورادار المتراكمات الذكي (محفوظ محلياً عبر LocalStorage)</p>
+        </div>
+        <div class="header-actions">
+            <button class="btn" id="btnExport" type="button">تصدير نسخة احتياطية (JSON)</button>
+            <button class="btn" id="btnImportTrigger" type="button">استيراد بيانات</button>
+            <input type="file" id="importFile" accept=".json" class="hidden">
+            <button class="btn btn-primary" id="btnToggleAdd" type="button">+ إضافة درس / حصة</button>
+        </div>
+    </header>
+
+    <!-- المنصات المعتمدة فقط -->
+    <div class="platforms-bar">
+        <div class="platform-card">
+            <div class="platform-info">
+                <h3>
+                    <span>مستر فادي نبيل (Mr. Fady Nabil)</span>
+                    <span class="platform-tag">الماث والرياضيات</span>
+                </h3>
+                <p>تفاضل وتكامل • جبر وهندسة فراغية • استاتيكا • ديناميكا</p>
+            </div>
+            <a href="https://mrfadynabil.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary">فتح المنصة ↗</a>
+        </div>
+        <div class="platform-card">
+            <div class="platform-info">
+                <h3>
+                    <span>منصة بسطتهالك (Bassthalk)</span>
+                    <span class="platform-tag">اللغة العربية</span>
+                </h3>
+                <p>النحو • البلاغة • الأدب • القراءة والنصوص المتحررة</p>
+            </div>
+            <a href="https://bassthalk.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary">فتح المنصة ↗</a>
+        </div>
+    </div>
+
+    <!-- شريط الروتين الأسبوعي وأيام الفراغ -->
+    <div class="routine-strip">
+        <div style="font-weight: 700; font-size: 0.88rem; color: var(--accent);">
+            الجدول الثابت وأيام الفراغ (لإعادة جدولة المتراكمات):
+        </div>
+        <div class="routine-pills">
+            <span class="routine-pill">السبت: كيمياء (2:00 م)</span>
+            <span class="routine-pill free-day">الأحد: يوم فراغ / مذاكرة حرة</span>
+            <span class="routine-pill">الإثنين: فيزياء (1:00 م)</span>
+            <span class="routine-pill free-day">الثلاثاء: يوم فراغ / مذاكرة حرة</span>
+            <span class="routine-pill free-day">الأربعاء: يوم فراغ / مذاكرة حرة</span>
+            <span class="routine-pill">الخميس: لغة ثانية - فرنساوي (10:00 ص)</span>
+            <span class="routine-pill">الجمعة: إنجليزي (4:00 م)</span>
+        </div>
+    </div>
+
+    <!-- بطاقات الإحصائيات -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-label">إجمالي الدروس المسجلة</div>
+            <div class="stat-val" id="statTotalLessons">0</div>
+            <div class="progress-track"><div class="progress-fill" id="barLessons" style="width: 100%;"></div></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">نسبة حضور الحصص</div>
+            <div class="stat-val" id="statAttendanceRate">0%</div>
+            <div class="progress-track"><div class="progress-fill" id="barAttendance" style="width: 0%; background: var(--accent-green);"></div></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">الواجبات المكتملة</div>
+            <div class="stat-val" id="statCompletedHw">0</div>
+            <div class="progress-track"><div class="progress-fill" id="barHw" style="width: 0%; background: var(--accent-purple);"></div></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">إنجاز المهام الكلي (5 مهام/درس)</div>
+            <div class="stat-val" id="statTasksRate">0%</div>
+            <div class="progress-track"><div class="progress-fill" id="barTasks" style="width: 0%;"></div></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">تنبيهات رادار المتراكمات</div>
+            <div class="stat-val" style="color: var(--accent-rose);" id="statBacklogCount">0</div>
+            <div class="progress-track"><div class="progress-fill" id="barBacklog" style="width: 0%; background: var(--accent-rose);"></div></div>
+        </div>
+    </div>
+
+    <!-- نموذج إضافة أو تعديل درس -->
+    <div id="addModal" class="panel hidden" style="border-color: var(--accent);">
+        <div class="panel-header">
+            <h2 id="modalTitle">إضافة درس / حصة جديدة للجدول</h2>
+            <button class="btn btn-sm" id="btnCloseModal" type="button">إغلاق ✕</button>
+        </div>
+        <input type="hidden" id="editLessonId" value="">
+        <div class="form-row">
+            <div>
+                <label style="font-size: 0.82rem; color: var(--text-muted); display: block; margin-bottom: 4px;">اسم الدرس / المحاضرة</label>
+                <input type="text" id="lessonTitle" placeholder="مثال: اشتقاق الدوال المثلثية / قوانين كيرشوف">
+            </div>
+            <div>
+                <label style="font-size: 0.82rem; color: var(--text-muted); display: block; margin-bottom: 4px;">المادة الدراسية (علمي رياضة)</label>
+                <select id="lessonSubject">
+                    <option value="تفاضل وتكامل">تفاضل وتكامل</option>
+                    <option value="جبر وهندسة فراغية">جبر وهندسة فراغية</option>
+                    <option value="استاتيكا">استاتيكا</option>
+                    <option value="ديناميكا">ديناميكا</option>
+                    <option value="فيزياء">فيزياء</option>
+                    <option value="كيمياء">كيمياء</option>
+                    <option value="لغة عربية">لغة عربية</option>
+                    <option value="إنجليزي">إنجليزي</option>
+                    <option value="لغة ثانية">لغة ثانية</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div>
+                <label style="font-size: 0.82rem; color: var(--text-muted); display: block; margin-bottom: 4px;">موعد الحصة (تاريخ ووقت)</label>
+                <input type="datetime-local" id="lessonDate">
+            </div>
+            <div>
+                <label style="font-size: 0.82rem; color: var(--text-muted); display: block; margin-bottom: 4px;">المنصة / مكان الحضور</label>
+                <select id="lessonPlatform">
+                    <option value="mrfadynabil.com">أونلاين - مستر فادي نبيل (mrfadynabil.com)</option>
+                    <option value="bassthalk.com">أونلاين - منصة بسطتهالك (bassthalk.com)</option>
+                    <option value="أوفلاين (سنتر / درس خاص)">أوفلاين (سنتر / درس خاص)</option>
+                </select>
+            </div>
+        </div>
+        <div style="display: flex; gap: 10px; justify-content: flex-end;">
+            <button class="btn btn-primary" id="btnSaveLesson" type="button" style="min-width: 180px;">حفظ الدرس في الجدول</button>
+        </div>
+    </div>
+
+    <!-- التبويبات -->
+    <div class="nav-tabs">
+        <button class="tab-btn active" data-tab="tab-dashboard" type="button">
+            <span>الجدول والمهام ورادار المتراكمات</span>
+            <span class="tab-badge" id="badgeLessonsCount">0</span>
+        </button>
+        <button class="tab-btn" data-tab="tab-subjects" type="button">
+            <span>تقدم مواد علمي رياضة (9 مواد)</span>
+        </button>
+        <button class="tab-btn" data-tab="tab-github" type="button">
+            <span>دليل النشر على GitHub Pages</span>
+        </button>
+    </div>
+
+    <!-- التبويب الأول: الجدول ورادار المتراكمات -->
+    <div id="tab-dashboard" class="tab-view">
+        <div class="main-grid">
+            <!-- قائمة الدروس والمهام -->
+            <div class="panel">
+                <div class="panel-header">
+                    <h2>جدول الحصص وقوائم المهام التفصيلية</h2>
+                    <button class="btn btn-sm" id="btnResetDemo" type="button">استعادة البيانات الافتراضية</button>
+                </div>
+
+                <!-- فلاتر البحث والتصفية -->
+                <div class="filters-row">
+                    <input type="text" id="searchQuery" placeholder="ابحث باسم الدرس...">
+                    <select id="filterSubject">
+                        <option value="ALL">كل المواد (9 مواد)</option>
+                        <option value="تفاضل وتكامل">تفاضل وتكامل</option>
+                        <option value="جبر وهندسة فراغية">جبر وهندسة فراغية</option>
+                        <option value="استاتيكا">استاتيكا</option>
+                        <option value="ديناميكا">ديناميكا</option>
+                        <option value="فيزياء">فيزياء</option>
+                        <option value="كيمياء">كيمياء</option>
+                        <option value="لغة عربية">لغة عربية</option>
+                        <option value="إنجليزي">إنجليزي</option>
+                        <option value="لغة ثانية">لغة ثانية</option>
+                    </select>
+                    <select id="filterStatus">
+                        <option value="ALL">كل الحالات</option>
+                        <option value="OVERDUE">متأخر / في المتراكمات</option>
+                        <option value="INCOMPLETE">قيد الإنجاز</option>
+                        <option value="COMPLETED">مكتمل بالكامل</option>
+                    </select>
+                </div>
+
+                <div id="lessonsContainer"></div>
+            </div>
+
+            <!-- رادار المتراكمات وإعادة الجدولة -->
+            <div class="panel">
+                <div class="panel-header">
+                    <h2 style="color: var(--accent-rose);">رادار المتراكمات (Backlog Tracker)</h2>
+                </div>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px;">
+                    يرصد تلقائياً أي حصة فات موعدها ولم تُحضر أو أي واجب لم يكتمل، مع إمكانية ترحيلها بضغطة واحدة لأقرب يوم فراغ (الأحد / الثلاثاء / الأربعاء):
+                </p>
+                <div id="backlogContainer"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- التبويب الثاني: مصفوفة مواد علمي رياضة -->
+    <div id="tab-subjects" class="tab-view hidden">
+        <div class="panel">
+            <div class="panel-header">
+                <h2>مؤشر إنجاز مواد شعبة علمي رياضة (9 مواد)</h2>
+            </div>
+            <div class="subjects-grid" id="subjectsMatrixContainer"></div>
+        </div>
+    </div>
+
+    <!-- التبويب الثالث: خطوات GitHub Pages -->
+    <div id="tab-github" class="tab-view hidden">
+        <div class="panel">
+            <div class="panel-header">
+                <h2>خطوات رفع المشروع مجاناً على GitHub Pages</h2>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 14px;">
+                هذا النظام مبني بالكامل داخل ملف <code>index.html</code> قياسي (Single-File SPA) بدون أي اعتماد على سيرفر خلفي، مما يجعله جاهزاً للنشر الفوري عبر GitHub Pages:
+            </p>
+
+            <h3 style="font-size: 1rem; color: var(--accent); margin-bottom: 6px;">1. تهيئة المستودع محلياً ورفع الكود</h3>
+            <div class="code-box" id="gitCmdBlock">git init
+git branch -M main
+git add index.html
+git commit -m "feat: deploy 3rd secondary math track study system"
+git remote add origin https://github.com/YOUR_USERNAME/thanaweya-math-tracker.git
+git push -u origin main</div>
+            <button class="btn btn-sm btn-primary" id="btnCopyGit" type="button" style="margin-bottom: 18px;">نسخ أوامر Git</button>
+
+            <h3 style="font-size: 1rem; color: var(--accent); margin-bottom: 6px;">2. تفعيل الاستضافة من إعدادات GitHub</h3>
+            <ul style="padding-right: 20px; color: var(--text-main); font-size: 0.9rem; display: flex; flex-direction: column; gap: 6px;">
+                <li>افتح مستودعك على GitHub ثم انتقل إلى تبويب <strong>Settings</strong> ثم قسم <strong>Pages</strong> من القائمة الجانبية.</li>
+                <li>تحت قسم <strong>Build and deployment (Source)</strong> اختر <strong>Deploy from a branch</strong>.</li>
+                <li>حدد الفرع <strong>main</strong> والمجلد <strong>/ (root)</strong> ثم اضغط <strong>Save</strong>.</li>
+                <li>خلال دقيقة سيعمل النظام مباشرة على الرابط: <code>https://&lt;username&gt;.github.io/thanaweya-math-tracker/</code></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- حاوية الإشعارات -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script>
+    const STORAGE_KEY = 'thanaweya_math_system_v2';
+
+    const ALL_SUBJECTS = [
+        { name: 'تفاضل وتكامل', category: 'رياضيات بحتة', platform: 'mrfadynabil.com', color: '#0284c7' },
+        { name: 'جبر وهندسة فراغية', category: 'رياضيات بحتة', platform: 'mrfadynabil.com', color: '#0ea5e9' },
+        { name: 'استاتيكا', category: 'رياضيات تطبيقية', platform: 'mrfadynabil.com', color: '#6366f1' },
+        { name: 'ديناميكا', category: 'رياضيات تطبيقية', platform: 'mrfadynabil.com', color: '#8b5cf6' },
+        { name: 'فيزياء', category: 'علوم فيزيائية (الإثنين 1:00 م)', platform: 'أوفلاين (سنتر / درس خاص)', color: '#f59e0b' },
+        { name: 'كيمياء', category: 'علوم كيميائية (السبت 2:00 م)', platform: 'أوفلاين (سنتر / درس خاص)', color: '#10b981' },
+        { name: 'لغة عربية', category: 'لغات أساسية', platform: 'bassthalk.com', color: '#ec4899' },
+        { name: 'إنجليزي', category: 'لغات أجنبية (الجمعة 4:00 م)', platform: 'أوفلاين (سنتر / درس خاص)', color: '#14b8a6' },
+        { name: 'لغة ثانية', category: 'فرنساوي (الخميس 10:00 ص)', platform: 'أوفلاين (سنتر / درس خاص)', color: '#f43f5e' }
+    ];
+
+    const DEFAULT_DATA = {
+        lessons: [
+            {
+                id: '101',
+                title: 'اشتقاق الدوال المثلثية والاشتقاق الضمني والبارامتري',
+                subject: 'تفاضل وتكامل',
+                platform: 'mrfadynabil.com',
+                date: '2026-11-10T18:00',
+                attended: true,
+                tasks: {
+                    study: true,
+                    summary: true,
+                    homework: false,
+                    correction: false,
+                    qbank: false
+                }
+            },
+            {
+                id: '102',
+                title: 'اتزان جسم على مستوى مائل خشن (الاحتكاك)',
+                subject: 'استاتيكا',
+                platform: 'mrfadynabil.com',
+                date: '2026-11-11T11:00',
+                attended: false,
+                tasks: {
+                    study: false,
+                    summary: false,
+                    homework: false,
+                    correction: false,
+                    qbank: false
+                }
+            },
+            {
+                id: '103',
+                title: 'الوحدة الثانية: الأبنية (اسم الفاعل وصيغ المبالغة واسم المفعول)',
+                subject: 'لغة عربية',
+                platform: 'bassthalk.com',
+                date: '2026-11-12T16:00',
+                attended: false,
+                tasks: {
+                    study: false,
+                    summary: false,
+                    homework: false,
+                    correction: false,
+                    qbank: false
+                }
+            },
+            {
+                id: '104',
+                title: 'التأثير المغناطيسي للتيار الكهربي وأجهزة القياس',
+                subject: 'فيزياء',
+                platform: 'أوفلاين (سنتر / درس خاص)',
+                date: '2026-11-16T13:00',
+                attended: false,
+                tasks: {
+                    study: false,
+                    summary: false,
+                    homework: false,
+                    correction: false,
+                    qbank: false
+                }
+            },
+            {
+                id: '105',
+                title: 'الاتزان الكيميائي والعوامل المؤثرة (قاعدة لوشاتيليه)',
+                subject: 'كيمياء',
+                platform: 'أوفلاين (سنتر / درس خاص)',
+                date: '2026-11-14T14:00',
+                attended: false,
+                tasks: {
+                    study: false,
+                    summary: false,
+                    homework: false,
+                    correction: false,
+                    qbank: false
+                }
+            }
+        ]
+    };
+
+    let appData = JSON.parse(JSON.stringify(DEFAULT_DATA));
+    let pendingDeleteId = null;
+
+    function showToast(message) {
+        const container = document.getElementById('toastContainer');
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.textContent = message;
+        container.appendChild(toast);
+        setTimeout(() => {
+            toast.remove();
+        }, 3200);
+    }
+
+    function normalizeLesson(lesson) {
+        const tasks = lesson.tasks || {};
+        return {
+            id: String(lesson.id || Date.now()),
+            title: lesson.title || 'درس بدون عنوان',
+            subject: lesson.subject || 'تفاضل وتكامل',
+            platform: lesson.platform || 'mrfadynabil.com',
+            date: lesson.date || '2026-11-12T16:00',
+            attended: Boolean(lesson.attended),
+            tasks: {
+                study: Boolean(tasks.study),
+                summary: Boolean(tasks.summary),
+                homework: Boolean(tasks.homework),
+                correction: Boolean(tasks.correction),
+                qbank: Boolean(tasks.qbank)
+            }
+        };
+    }
+
+    function loadData() {
+        try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (raw) {
+                const parsed = JSON.parse(raw);
+                if (parsed && Array.isArray(parsed.lessons)) {
+                    appData.lessons = parsed.lessons.map(normalizeLesson);
+                }
+            }
+        } catch (err) {
+            console.warn('LocalStorage read error:', err);
+        }
+        renderAll();
+    }
+
+    function saveData() {
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
+        } catch (err) {
+            console.warn('LocalStorage write error:', err);
+        }
+        renderAll();
+    }
+
+    function getNextFreeDayISO(targetWeekday) {
+        // 0 = Sunday, 2 = Tuesday, 3 = Wednesday
+        const now = new Date();
+        const result = new Date(now.getTime());
+        result.setHours(16, 0, 0, 0);
+        let daysToAdd = (targetWeekday - result.getDay() + 7) % 7;
+        if (daysToAdd === 0 && result <= now) {
+            daysToAdd = 7;
+        }
+        result.setDate(result.getDate() + daysToAdd);
+        const pad = n => String(n).padStart(2, '0');
+        return `${result.getFullYear()}-${pad(result.getMonth() + 1)}-${pad(result.getDate())}T16:00`;
+    }
+
+    function isLessonCompleted(lesson) {
+        const t = lesson.tasks;
+        return lesson.attended && t.study && t.summary && t.homework && t.correction && t.qbank;
+    }
+
+    function getSubjectColor(subjectName) {
+        const found = ALL_SUBJECTS.find(s => s.name === subjectName);
+        return found ? found.color : '#0284c7';
+    }
+
+    function formatArabicDate(isoStr) {
+        const d = new Date(isoStr);
+        if (isNaN(d.getTime())) return isoStr;
+        return d.toLocaleDateString('ar-EG', {
+            weekday: 'long',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    }
+
+    function renderAll() {
+        renderLessonsAndBacklog();
+        renderSubjectsMatrix();
+    }
+
+    function renderLessonsAndBacklog() {
+        const lessonsContainer = document.getElementById('lessonsContainer');
+        const backlogContainer = document.getElementById('backlogContainer');
+        const searchVal = document.getElementById('searchQuery').value.trim().toLowerCase();
+        const subjectFilter = document.getElementById('filterSubject').value;
+        const statusFilter = document.getElementById('filterStatus').value;
+
+        lessonsContainer.innerHTML = '';
+        backlogContainer.innerHTML = '';
+
+        const now = new Date();
+        let attendedCount = 0;
+        let completedHwCount = 0;
+        let completedTasksTotal = 0;
+        const totalPossibleTasks = appData.lessons.length * 5;
+        const backlogList = [];
+
+        // حساب الإحصائيات والمتراكمات عبر كل الدروس
+        appData.lessons.forEach(lesson => {
+            if (lesson.attended) attendedCount++;
+            if (lesson.tasks.homework) completedHwCount++;
+
+            const t = lesson.tasks;
+            completedTasksTotal += (t.study ? 1 : 0) + (t.summary ? 1 : 0) + (t.homework ? 1 : 0) + (t.correction ? 1 : 0) + (t.qbank ? 1 : 0);
+
+            const lessonDate = new Date(lesson.date);
+            const isPast = lessonDate < now;
+
+            if (isPast && (!lesson.attended || !lesson.tasks.homework)) {
+                const reasons = [];
+                if (!lesson.attended) reasons.push('فات موعد الحصة ولم يتم تسجيل الحضور');
+                if (!lesson.tasks.homework) reasons.push('واجب الدرس لم يكتمل بعد');
+                backlogList.push({ lesson, reasons });
+            }
+        });
+
+        // تحديث الأرقام في البطاقات العلوية
+        const totalCount = appData.lessons.length;
+        const attendancePct = totalCount > 0 ? Math.round((attendedCount / totalCount) * 100) : 0;
+        const hwPct = totalCount > 0 ? Math.round((completedHwCount / totalCount) * 100) : 0;
+        const tasksPct = totalPossibleTasks > 0 ? Math.round((completedTasksTotal / totalPossibleTasks) * 100) : 0;
+
+        document.getElementById('statTotalLessons').textContent = String(totalCount);
+        document.getElementById('badgeLessonsCount').textContent = String(totalCount);
+        document.getElementById('statAttendanceRate').textContent = attendancePct + '%';
+        document.getElementById('statCompletedHw').textContent = `${completedHwCount} / ${totalCount}`;
+        document.getElementById('statTasksRate').textContent = tasksPct + '%';
+        document.getElementById('statBacklogCount').textContent = String(backlogList.length);
+
+        document.getElementById('barAttendance').style.width = attendancePct + '%';
+        document.getElementById('barHw').style.width = hwPct + '%';
+        document.getElementById('barTasks').style.width = tasksPct + '%';
+        document.getElementById('barBacklog').style.width = (totalCount > 0 ? Math.min(100, Math.round((backlogList.length / totalCount) * 100)) : 0) + '%';
+
+        // تصفية الدروس للعرض
+        const filteredLessons = appData.lessons.filter(lesson => {
+            const matchesSearch = lesson.title.toLowerCase().includes(searchVal) || lesson.subject.toLowerCase().includes(searchVal);
+            const matchesSubject = subjectFilter === 'ALL' || lesson.subject === subjectFilter;
+
+            const lessonDate = new Date(lesson.date);
+            const isOverdue = (lessonDate < now) && (!lesson.attended || !lesson.tasks.homework);
+            const isDone = isLessonCompleted(lesson);
+
+            let matchesStatus = true;
+            if (statusFilter === 'OVERDUE') matchesStatus = isOverdue;
+            else if (statusFilter === 'COMPLETED') matchesStatus = isDone;
+            else if (statusFilter === 'INCOMPLETE') matchesStatus = !isDone;
+
+            return matchesSearch && matchesSubject && matchesStatus;
+        });
+
+        if (filteredLessons.length === 0) {
+            lessonsContainer.innerHTML = `
+                <div style="text-align: center; padding: 32px 16px; color: var(--text-muted); border: 1px dashed var(--border); border-radius: 10px;">
+                    لا توجد دروس مطابقة لخيارات البحث الحالية.
+                </div>
+            `;
+        } else {
+            filteredLessons.forEach(lesson => {
+                const lessonDate = new Date(lesson.date);
+                const isPast = lessonDate < now;
+                const isOverdue = isPast && (!lesson.attended || !lesson.tasks.homework);
+                const isDone = isLessonCompleted(lesson);
+
+                let statusBadgeHtml = `<span class="status-badge status-upcoming">قادم في الجدول</span>`;
+                if (isDone) {
+                    statusBadgeHtml = `<span class="status-badge status-done">مكتمل بالكامل ✓</span>`;
+                } else if (isOverdue) {
+                    statusBadgeHtml = `<span class="status-badge status-overdue">تنبيه: متأخر عن الموعد!</span>`;
+                }
+
+                const platformLinkHtml = lesson.platform === 'mrfadynabil.com'
+                    ? `<a href="https://mrfadynabil.com" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: none; font-weight: 700;">mrfadynabil.com ↗</a>`
+                    : lesson.platform === 'bassthalk.com'
+                        ? `<a href="https://bassthalk.com" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: none; font-weight: 700;">bassthalk.com ↗</a>`
+                        : `<span>${lesson.platform}</span>`;
+
+                const card = document.createElement('div');
+                card.className = `lesson-card ${isOverdue ? 'overdue-card' : ''} ${isDone ? 'completed-card' : ''}`;
+
+                const deleteButtonLabel = pendingDeleteId === lesson.id ? 'تأكيد الحذف النهائي؟' : 'حذف';
+
+                card.innerHTML = `
+                    <div class="lesson-meta">
+                        <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 8px;">
+                            <span class="subject-badge" style="background: ${getSubjectColor(lesson.subject)}">${lesson.subject}</span>
+                            <strong style="font-size: 1.02rem;">${lesson.title}</strong>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            ${statusBadgeHtml}
+                            <button class="btn btn-sm btn-danger" data-action="delete" data-id="${lesson.id}" type="button">${deleteButtonLabel}</button>
+                        </div>
+                    </div>
+
+                    <div class="lesson-details">
+                        <span>الموعد: <strong>${formatArabicDate(lesson.date)}</strong></span>
+                        <span>المنصة: ${platformLinkHtml}</span>
+                    </div>
+
+                    <div class="attendance-box">
+                        <label class="task-item ${lesson.attended ? 'task-done' : ''}" style="background: transparent; border: none; padding: 0;">
+                            <input type="checkbox" data-action="toggle-attendance" data-id="${lesson.id}" ${lesson.attended ? 'checked' : ''}>
+                            <span style="font-weight: 700;">تسجيل حضور الحصة (أوفلاين / أونلاين)</span>
+                        </label>
+                        ${isPast && !lesson.attended ? '<span style="font-size: 0.78rem; color: var(--accent-rose); font-weight: 700;">الحصة فات موعدها ولم تحضرها بعد!</span>' : ''}
+                    </div>
+
+                    <div class="task-grid">
+                        <label class="task-item ${lesson.tasks.study ? 'task-done' : ''}">
+                            <input type="checkbox" data-action="toggle-task" data-id="${lesson.id}" data-task="study" ${lesson.tasks.study ? 'checked' : ''}>
+                            <span>1. مذاكرة الشرح</span>
+                        </label>
+                        <label class="task-item ${lesson.tasks.summary ? 'task-done' : ''}">
+                            <input type="checkbox" data-action="toggle-task" data-id="${lesson.id}" data-task="summary" ${lesson.tasks.summary ? 'checked' : ''}>
+                            <span>2. تلخيص القوانين</span>
+                        </label>
+                        <label class="task-item ${lesson.tasks.homework ? 'task-done' : ''}">
+                            <input type="checkbox" data-action="toggle-task" data-id="${lesson.id}" data-task="homework" ${lesson.tasks.homework ? 'checked' : ''}>
+                            <span>3. حل الواجب</span>
+                        </label>
+                        <label class="task-item ${lesson.tasks.correction ? 'task-done' : ''}">
+                            <input type="checkbox" data-action="toggle-task" data-id="${lesson.id}" data-task="correction" ${lesson.tasks.correction ? 'checked' : ''}>
+                            <span>4. تصحيح الأخطاء</span>
+                        </label>
+                        <label class="task-item ${lesson.tasks.qbank ? 'task-done' : ''}">
+                            <input type="checkbox" data-action="toggle-task" data-id="${lesson.id}" data-task="qbank" ${lesson.tasks.qbank ? 'checked' : ''}>
+                            <span>5. حل بنك أسئلة</span>
+                        </label>
+                    </div>
+                `;
+                lessonsContainer.appendChild(card);
+            });
+        }
+
+        // عرض رادار المتراكمات مع إعادة الجدولة لأيام الفراغ
+        if (backlogList.length === 0) {
+            backlogContainer.innerHTML = `
+                <div style="background: rgba(34, 197, 94, 0.08); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 10px; padding: 18px; text-align: center; color: var(--accent-green); font-weight: 700;">
+                    لا توجد أي متراكمات حالياً! جدولك منتظم بالكامل.
+                </div>
+            `;
+        } else {
+            backlogList.forEach(({ lesson, reasons }) => {
+                const item = document.createElement('div');
+                item.className = 'backlog-item';
+                item.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px;">
+                        <div>
+                            <span class="subject-badge" style="background: ${getSubjectColor(lesson.subject)}; margin-bottom: 4px;">${lesson.subject}</span>
+                            <div style="font-weight: 800; font-size: 0.95rem;">${lesson.title}</div>
+                        </div>
+                    </div>
+                    <div class="backlog-reasons">
+                        ${reasons.map(r => `<span class="reason-chip">${r}</span>`).join('')}
+                    </div>
+                    <div class="reschedule-bar">
+                        <span style="font-size: 0.78rem; color: var(--text-muted); width: 100%;">إعادة جدولة ليوم فراغ:</span>
+                        <button class="btn btn-sm btn-amber" data-action="reschedule-day" data-id="${lesson.id}" data-day="0" type="button">الأحد القادم</button>
+                        <button class="btn btn-sm btn-amber" data-action="reschedule-day" data-id="${lesson.id}" data-day="2" type="button">الثلاثاء القادم</button>
+                        <button class="btn btn-sm btn-amber" data-action="reschedule-day" data-id="${lesson.id}" data-day="3" type="button">الأربعاء القادم</button>
+                        <div style="display: flex; gap: 6px; width: 100%; margin-top: 4px;">
+                            <input type="datetime-local" id="customDate-${lesson.id}" value="${lesson.date}" style="font-size: 0.78rem; padding: 5px 8px;">
+                            <button class="btn btn-sm" data-action="reschedule-custom" data-id="${lesson.id}" type="button">تحديث الموعد</button>
+                        </div>
+                    </div>
+                `;
+                backlogContainer.appendChild(item);
+            });
+        }
+    }
+
+    function renderSubjectsMatrix() {
+        const container = document.getElementById('subjectsMatrixContainer');
+        container.innerHTML = '';
+
+        ALL_SUBJECTS.forEach(subj => {
+            const subjLessons = appData.lessons.filter(l => l.subject === subj.name);
+            const count = subjLessons.length;
+            let doneTasks = 0;
+            const totalTasks = count * 5;
+
+            subjLessons.forEach(l => {
+                const t = l.tasks;
+                doneTasks += (t.study ? 1 : 0) + (t.summary ? 1 : 0) + (t.homework ? 1 : 0) + (t.correction ? 1 : 0) + (t.qbank ? 1 : 0);
+            });
+
+            const pct = totalTasks > 0 ? Math.round((doneTasks / totalTasks) * 100) : 0;
+
+            const card = document.createElement('div');
+            card.className = 'subject-card';
+            card.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span class="subject-badge" style="background: ${subj.color}">${subj.name}</span>
+                    <span style="font-size: 0.8rem; color: var(--text-muted);">${count} دروس مسجلة</span>
+                </div>
+                <div style="font-size: 0.83rem; color: var(--text-muted);">${subj.category}</div>
+                <div style="font-size: 0.8rem; color: var(--accent);">المنصة: ${subj.platform}</div>
+                <div style="margin-top: 4px;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 4px;">
+                        <span>نسبة إنجاز المهام</span>
+                        <strong>${pct}% (${doneTasks}/${totalTasks})</strong>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill" style="width: ${pct}%; background: ${subj.color};"></div>
+                    </div>
+                </div>
+                <button class="btn btn-sm" data-action="quick-add-subject" data-subject="${subj.name}" data-platform="${subj.platform}" type="button" style="margin-top: 6px;">
+                    + إضافة درس في ${subj.name}
+                </button>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    // التفاعل مع الأحداث (Event Delegation)
+    document.addEventListener('click', function (e) {
+        const target = e.target.closest('[data-action], .tab-btn');
+        if (!target) return;
+
+        // تبديل التبويبات
+        if (target.classList.contains('tab-btn')) {
+            const tabId = target.getAttribute('data-tab');
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            target.classList.add('active');
+            document.querySelectorAll('.tab-view').forEach(v => v.classList.add('hidden'));
+            const activeView = document.getElementById(tabId);
+            if (activeView) activeView.classList.remove('hidden');
+            return;
+        }
+
+        const action = target.getAttribute('data-action');
+        const id = target.getAttribute('data-id');
+
+        if (action === 'delete') {
+            if (pendingDeleteId === id) {
+                appData.lessons = appData.lessons.filter(l => l.id !== id);
+                pendingDeleteId = null;
+                saveData();
+                showToast('تم حذف الدرس من الجدول');
+            } else {
+                pendingDeleteId = id;
+                renderLessonsAndBacklog();
+                setTimeout(() => {
+                    if (pendingDeleteId === id) {
+                        pendingDeleteId = null;
+                        renderLessonsAndBacklog();
+                    }
+                }, 3500);
+            }
+        } else if (action === 'reschedule-day') {
+            const weekday = parseInt(target.getAttribute('data-day'), 10);
+            const lesson = appData.lessons.find(l => l.id === id);
+            if (lesson) {
+                lesson.date = getNextFreeDayISO(weekday);
+                saveData();
+                showToast(`تم ترحيل "${lesson.title}" إلى يوم الفراغ المختار`);
+            }
+        } else if (action === 'reschedule-custom') {
+            const input = document.getElementById(`customDate-${id}`);
+            const lesson = appData.lessons.find(l => l.id === id);
+            if (lesson && input && input.value) {
+                lesson.date = input.value;
+                saveData();
+                showToast(`تم تحديث موعد "${lesson.title}" بنجاح`);
+            }
+        } else if (action === 'quick-add-subject') {
+            const subj = target.getAttribute('data-subject');
+            const plat = target.getAttribute('data-platform');
+            document.getElementById('lessonSubject').value = subj;
+            document.getElementById('lessonPlatform').value = plat;
+            const modal = document.getElementById('addModal');
+            modal.classList.remove('hidden');
+            document.getElementById('lessonTitle').focus();
+        }
+    });
+
+    document.addEventListener('change', function (e) {
+        const target = e.target;
+        const action = target.getAttribute('data-action');
+        const id = target.getAttribute('data-id');
+
+        if (action === 'toggle-attendance') {
+            const lesson = appData.lessons.find(l => l.id === id);
+            if (lesson) {
+                lesson.attended = target.checked;
+                saveData();
+                showToast(lesson.attended ? 'تم تسجيل حضور الحصة ✓' : 'تم إلغاء تسجيل الحضور');
+            }
+        } else if (action === 'toggle-task') {
+            const taskKey = target.getAttribute('data-task');
+            const lesson = appData.lessons.find(l => l.id === id);
+            if (lesson && taskKey) {
+                lesson.tasks[taskKey] = target.checked;
+                saveData();
+            }
+        }
+    });
+
+    // أزرار التحكم الرئيسية
+    document.getElementById('btnToggleAdd').addEventListener('click', function () {
+        const modal = document.getElementById('addModal');
+        modal.classList.toggle('hidden');
+        if (!modal.classList.contains('hidden')) {
+            document.getElementById('lessonDate').value = getNextFreeDayISO(0);
+            document.getElementById('lessonTitle').focus();
+        }
+    });
+
+    document.getElementById('btnCloseModal').addEventListener('click', function () {
+        document.getElementById('addModal').classList.add('hidden');
+    });
+
+    document.getElementById('lessonSubject').addEventListener('change', function (e) {
+        const val = e.target.value;
+        const platformSelect = document.getElementById('lessonPlatform');
+        if (['تفاضل وتكامل', 'جبر وهندسة فراغية', 'استاتيكا', 'ديناميكا'].includes(val)) {
+            platformSelect.value = 'mrfadynabil.com';
+        } else if (val === 'لغة عربية') {
+            platformSelect.value = 'bassthalk.com';
+        } else {
+            platformSelect.value = 'أوفلاين (سنتر / درس خاص)';
+        }
+    });
+
+    document.getElementById('btnSaveLesson').addEventListener('click', function () {
+        const titleInput = document.getElementById('lessonTitle');
+        const subjectSelect = document.getElementById('lessonSubject');
+        const dateInput = document.getElementById('lessonDate');
+        const platformSelect = document.getElementById('lessonPlatform');
+
+        const title = titleInput.value.trim();
+        const subject = subjectSelect.value;
+        const date = dateInput.value;
+        const platform = platformSelect.value;
+
+        if (!title || !date) {
+            showToast('يرجى إدخال اسم الدرس وتحديد الموعد أولاً');
+            return;
+        }
+
+        appData.lessons.unshift({
+            id: String(Date.now()),
+            title,
+            subject,
+            platform,
+            date,
+            attended: false,
+            tasks: {
+                study: false,
+                summary: false,
+                homework: false,
+                correction: false,
+                qbank: false
+            }
+        });
+
+        titleInput.value = '';
+        document.getElementById('addModal').classList.add('hidden');
+        saveData();
+        showToast('تمت إضافة الدرس إلى الجدول بنجاح ✓');
+    });
+
+    // البحث والفلاتر
+    document.getElementById('searchQuery').addEventListener('input', renderLessonsAndBacklog);
+    document.getElementById('filterSubject').addEventListener('change', renderLessonsAndBacklog);
+    document.getElementById('filterStatus').addEventListener('change', renderLessonsAndBacklog);
+
+    // تصدير واستيراد JSON
+    document.getElementById('btnExport').addEventListener('click', function () {
+        const blob = new Blob([JSON.stringify(appData, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `thanaweya_math_backup_${new Date().toISOString().slice(0, 10)}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast('تم تحميل ملف النسخة الاحتياطية (JSON)');
+    });
+
+    document.getElementById('btnImportTrigger').addEventListener('click', function () {
+        document.getElementById('importFile').click();
+    });
+
+    document.getElementById('importFile').addEventListener('change', function (e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function (ev) {
+            try {
+                const parsed = JSON.parse(ev.target.result);
+                if (parsed && Array.isArray(parsed.lessons)) {
+                    appData.lessons = parsed.lessons.map(normalizeLesson);
+                    saveData();
+                    showToast('تم استيراد البيانات وتحديث الجدول بنجاح ✓');
+                } else {
+                    showToast('هيكل ملف JSON غير مطابق للنظام');
+                }
+            } catch (err) {
+                showToast('تعذر قراءة ملف JSON');
+            }
+        };
+        reader.readAsText(file);
+        e.target.value = '';
+    });
+
+    document.getElementById('btnResetDemo').addEventListener('click', function () {
+        appData = JSON.parse(JSON.stringify(DEFAULT_DATA));
+        saveData();
+        showToast('تمت استعادة البيانات الافتراضية');
+    });
+
+    document.getElementById('btnCopyGit').addEventListener('click', function () {
+        const text = document.getElementById('gitCmdBlock').textContent;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('تم نسخ أوامر Git إلى الحافظة ✓');
+            }).catch(() => fallbackCopy(text));
+        } else {
+            fallbackCopy(text);
+        }
+    });
+
+    function fallbackCopy(text) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+            document.execCommand('copy');
+            showToast('تم نسخ أوامر Git إلى الحافظة ✓');
+        } catch (err) {
+            showToast('يرجى نسخ الأوامر يدوياً');
+        }
+        ta.remove();
+    }
+
+    // التشغيل الأولي
+    loadData();
+</script>
+
+</body>
+</html>
